@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/features/user_auth/presentation/pages/sign_up_page.dart';
 import 'package:flutter_firebase/features/user_auth/presentation/pages/widgets/form_container_widget.dart';
-// Ensure correct import
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -163,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
       User? user = await _auth.signInWithEmailAndPassword(email, password);
       if (user != null) {
         showToast(message: "User is successfully signed in");
-        Navigator.pushNamed(context, "/home");
+        Navigator.pushReplacementNamed(context, '/splash');
       } else {
         showToast(message: "Some error occurred");
       }
@@ -191,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        Navigator.pushNamed(context, "/home");
+        Navigator.pushReplacementNamed(context, '/splash');
       }
     } catch (e) {
       showToast(message: "Error: $e");

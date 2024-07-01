@@ -1,36 +1,52 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
-
 class SplashScreen extends StatefulWidget {
-  final Widget? child;
-  const SplashScreen({super.key, this.child});
-
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-@override
+  @override
   void initState() {
-    Future.delayed(
-      Duration(seconds: 3),(){
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => widget.child!), (route) => false);
-    }
-    );
     super.initState();
+    // Navigate to home page after 4 seconds
+    Timer(Duration(seconds: 4), () {
+      Navigator.pushReplacementNamed(context, '/home');
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          "Welcome To Studio Lights",
-          style: TextStyle(
-            color: Colors.blue,
-            fontWeight: FontWeight.bold,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.black, Colors.black87],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.lightbulb,
+                size: 100,
+                color: Colors.orange,
+              ),
+              SizedBox(height: 20),
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  children: <TextSpan>[
+                    TextSpan(text: 'Welcome to the ', style: TextStyle(color: Colors.white)),
+                    TextSpan(text: 'Studio Light', style: TextStyle(color: Colors.orange)),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
